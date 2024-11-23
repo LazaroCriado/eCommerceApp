@@ -1,0 +1,10 @@
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\eCommerceApp.exe.config
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\eCommerceApp.exe
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\eCommerceApp.pdb
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.csproj.AssemblyReference.cache
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.Form1.resources
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.Properties.Resources.resources
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.csproj.GenerateResource.cache
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.csproj.CoreCompileInputs.cache
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.exe
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.pdb
