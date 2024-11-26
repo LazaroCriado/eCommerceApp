@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using domain;
 using bussines;
+using System.Net.NetworkInformation;
 
 namespace eCommerceApp
 {
@@ -125,7 +126,12 @@ namespace eCommerceApp
             if (selectedField == "Texto")
             {
                 cmbCriteria.Items.Clear();
-                cmbCriteria.Items.Add("Contiene");
+                cmbCriteria.Items.Add("Su Codigo contiene");
+                cmbCriteria.Items.Add("Su Nombre contiene");
+                cmbCriteria.Items.Add("Su Descripcion contiene");
+                cmbCriteria.Items.Add("Su Marca contiene");
+                cmbCriteria.Items.Add("Su Categoria contiene");
+                cmbCriteria.SelectedItem = "Su Nombre Contiene";
             }
             else
             {
@@ -133,11 +139,23 @@ namespace eCommerceApp
                 cmbCriteria.Items.Add("Mayor a");
                 cmbCriteria.Items.Add("Menor a");
                 cmbCriteria.Items.Add("Igual a");
+                cmbCriteria.SelectedItem = "Menor a";
             }
         }
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
+
+            if (!txtFilter.Text.All(char.IsDigit))
+            {
+                txtFilter.ForeColor = Color.Red;
+            }
+            else
+            {
+                txtFilter.ForeColor = Color.Black;
+            }
+
+            /*
             if(cmbField.SelectedItem.ToString() == "Texto")
             {
                 if (string.IsNullOrEmpty(txtFilter.Text))
@@ -149,26 +167,36 @@ namespace eCommerceApp
                 {
                     txtFilter.ForeColor= Color.Black;
                 }
-            }
-            else
-            {
-                if (!txtFilter.Text.All(char.IsDigit))
-                {
-                    txtFilter.ForeColor = Color.Red;
-                }
-                else
-                {
-                    txtFilter.ForeColor= Color.Black;
-                }
-                
-            }
+            }*/
+
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
             ArticleBussines articleBussines = new ArticleBussines();
-            List<Article> list = articleBussines.Filter(cmbField.SelectedItem.ToString(), cmbCriteria.SelectedItem.ToString(), txtFilter.Text);
-            dgvArticles.DataSource = list;
+            try
+            {
+                string field = cmbField.SelectedItem.ToString();
+                string criteria = cmbCriteria.SelectedItem.ToString();
+                string filter = txtFilter.Text;
+                if(field=="Precio" && !filter.All(char.IsDigit))
+                {
+                    MessageBox.Show("Utilice solo numeros para filtar por precio.");
+                }
+                List<Article> list = articleBussines.Filter(field, criteria, filter);
+                dgvArticles.DataSource = list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void btnViewDetail_Click(object sender, EventArgs e)
+        {
+            AddArticle viewArticle = new AddArticle((Article)dgvArticles.CurrentRow.DataBoundItem, true);
+            viewArticle.ShowDialog();
         }
     }
 }

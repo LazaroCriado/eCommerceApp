@@ -33,7 +33,7 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnModifiy = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnHide = new System.Windows.Forms.Button();
+            this.btnViewDetail = new System.Windows.Forms.Button();
             this.lblField = new System.Windows.Forms.Label();
             this.cmbField = new System.Windows.Forms.ComboBox();
             this.lblCriteria = new System.Windows.Forms.Label();
@@ -106,18 +106,20 @@
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnHide
+            // btnViewDetail
             // 
-            this.btnHide.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnHide.Location = new System.Drawing.Point(579, 385);
-            this.btnHide.Name = "btnHide";
-            this.btnHide.Size = new System.Drawing.Size(137, 39);
-            this.btnHide.TabIndex = 5;
-            this.btnHide.Text = "Dar de baja";
-            this.btnHide.UseVisualStyleBackColor = true;
+            this.btnViewDetail.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnViewDetail.Location = new System.Drawing.Point(579, 385);
+            this.btnViewDetail.Name = "btnViewDetail";
+            this.btnViewDetail.Size = new System.Drawing.Size(137, 39);
+            this.btnViewDetail.TabIndex = 5;
+            this.btnViewDetail.Text = "Ver Detalle";
+            this.btnViewDetail.UseVisualStyleBackColor = true;
+            this.btnViewDetail.Click += new System.EventHandler(this.btnViewDetail_Click);
             // 
             // lblField
             // 
+            this.lblField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblField.AutoSize = true;
             this.lblField.Location = new System.Drawing.Point(14, 453);
             this.lblField.Name = "lblField";
@@ -127,16 +129,18 @@
             // 
             // cmbField
             // 
+            this.cmbField.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbField.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbField.FormattingEnabled = true;
             this.cmbField.Location = new System.Drawing.Point(80, 449);
             this.cmbField.Name = "cmbField";
-            this.cmbField.Size = new System.Drawing.Size(160, 28);
+            this.cmbField.Size = new System.Drawing.Size(181, 28);
             this.cmbField.TabIndex = 7;
             this.cmbField.SelectedIndexChanged += new System.EventHandler(this.cmbField_SelectedIndexChanged);
             // 
             // lblCriteria
             // 
+            this.lblCriteria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCriteria.AutoSize = true;
             this.lblCriteria.Location = new System.Drawing.Point(281, 453);
             this.lblCriteria.Name = "lblCriteria";
@@ -146,23 +150,26 @@
             // 
             // cmbCriteria
             // 
+            this.cmbCriteria.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmbCriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCriteria.FormattingEnabled = true;
             this.cmbCriteria.Location = new System.Drawing.Point(346, 449);
             this.cmbCriteria.Name = "cmbCriteria";
-            this.cmbCriteria.Size = new System.Drawing.Size(160, 28);
+            this.cmbCriteria.Size = new System.Drawing.Size(181, 28);
             this.cmbCriteria.TabIndex = 9;
             // 
             // txtFilter
             // 
+            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.txtFilter.Location = new System.Drawing.Point(597, 450);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(160, 26);
+            this.txtFilter.Size = new System.Drawing.Size(181, 26);
             this.txtFilter.TabIndex = 10;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
             // lblFilter
             // 
+            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFilter.AutoSize = true;
             this.lblFilter.Location = new System.Drawing.Point(547, 453);
             this.lblFilter.Name = "lblFilter";
@@ -172,7 +179,8 @@
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(777, 444);
+            this.btnFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnFilter.Location = new System.Drawing.Point(795, 443);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(137, 39);
             this.btnFilter.TabIndex = 12;
@@ -192,7 +200,7 @@
             this.Controls.Add(this.lblCriteria);
             this.Controls.Add(this.cmbField);
             this.Controls.Add(this.lblField);
-            this.Controls.Add(this.btnHide);
+            this.Controls.Add(this.btnViewDetail);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnModifiy);
             this.Controls.Add(this.btnAdd);
@@ -215,7 +223,7 @@
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Button btnModifiy;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnHide;
+        private System.Windows.Forms.Button btnViewDetail;
         private System.Windows.Forms.Label lblField;
         private System.Windows.Forms.ComboBox cmbField;
         private System.Windows.Forms.Label lblCriteria;

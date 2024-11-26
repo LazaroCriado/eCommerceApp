@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -121,53 +122,95 @@ namespace bussines
         public List<Article> Filter(string field, string criteria, string filter)
         {
             List<Article> FilteredArticles = new List<Article>();
-            string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl as Foto, A.Precio from ARTICULOS A, MARCAS M, CATEGORIAS C\r\nwhere A.IdMarca = M.Id AND A.IdCategoria = C.Id and ";
+            
             try
             {
-                if (field == "Texto")
+                if(filter != string.Empty)
                 {
-                    query += "A.Codigo like '%" + filter + "%' and ";
-                    query += "A.Nombre like '%" + filter + "%'  and ";
-                    query += "A.Descripcion like '%" + filter + "%' and ";
-                    query += "M.Descripcion like '%" + filter + "%'  and ";
-                    query += "C.Descripcion like '%" + filter + "%'";
+                    string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl as Foto, A.Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id AND A.IdCategoria = C.Id AND ";
+                    if (field == "Texto")
+                    {
+                        switch (criteria)
+                        {
+                            case "Su Codigo contiene":
+                                query += "Codigo like '%" + filter + "%'";
+                                break;
+                            case "Su Nombre contiene":
+                                query += "Nombre like '%" + filter + "%'";
+                                break;
+                            case "Su Descripcion contiene":
+                                query += "A.Descripcion like '%" + filter + "%'";
+                                break;
+                            case "Su Marca contiene":
+                                query += "M.Descripcion like '%" + filter + "%'";
+                                break;
+                            case "Su Categoria contiene":
+                                query += "C.Descripcion like '%" + filter + "%'";
+                                break;
+                            default:
+                                query += "Nombre like '%" + filter + "%'";
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        switch (criteria)
+                        {
+                            case "Mayor a":
+                                query += "A.Precio > " + System.Convert.ToDecimal(filter);
+                                break;
+                            case "Menor a":
+                                query += "A.Precio < " + System.Convert.ToDecimal(filter);
+                                break;
+                            default:
+                                    query += "A.Precio = " + System.Convert.ToDecimal(filter);
+                                break;
+                        }
+                    }
+                
+                    dataAccess.SetQuery(query);
+                    dataAccess.ExecuteRead();
+                    while (dataAccess.Reader.Read())
+                    {
+                        Article article = new Article();
+                        article.Id = (int)dataAccess.Reader["Id"];
+                        article.Code = (string)dataAccess.Reader["Codigo"];
+                        article.Name = (string)dataAccess.Reader["Nombre"];
+                        article.Description = (string)dataAccess.Reader["Descripcion"];
+                        article.Brand = new Brand();
+                        article.Brand.Id = (int)dataAccess.Reader["IdMarca"];
+                        article.Brand.Description = (string)dataAccess.Reader["Marca"];
+                        article.Category = new Category();
+                        article.Category.Id = (int)dataAccess.Reader["IdCategoria"];
+                        article.Category.Description = (string)dataAccess.Reader["Categoria"];
+                        article.UrlPicture = (string)dataAccess.Reader["Foto"];
+                        article.Price = (decimal)dataAccess.Reader["Precio"];
+                        FilteredArticles.Add(article);
+                    }
                 }
                 else
                 {
-                    switch (criteria)
+                    string query = "select A.Id, A.Codigo, A.Nombre, A.Descripcion, A.IdMarca, M.Descripcion AS Marca, A.IdCategoria, C.Descripcion AS Categoria, A.ImagenUrl as Foto, A.Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where A.IdMarca = M.Id AND A.IdCategoria = C.Id";
+                    dataAccess.SetQuery(query);
+                    dataAccess.ExecuteRead();
+                    while (dataAccess.Reader.Read())
                     {
-                        case "Mayor a":
-                            query += "A.Precio > " + System.Convert.ToDecimal(filter);
-                            break;
-                        case "Menor a":
-                            query += "A.Precio < " + System.Convert.ToDecimal(filter);
-                            break;
-                        default:
-                                query += "A.Precio = " + System.Convert.ToDecimal(filter);
-                            break;
+                        Article article = new Article();
+                        article.Id = (int)dataAccess.Reader["Id"];
+                        article.Code = (string)dataAccess.Reader["Codigo"];
+                        article.Name = (string)dataAccess.Reader["Nombre"];
+                        article.Description = (string)dataAccess.Reader["Descripcion"];
+                        article.Brand = new Brand();
+                        article.Brand.Id = (int)dataAccess.Reader["IdMarca"];
+                        article.Brand.Description = (string)dataAccess.Reader["Marca"];
+                        article.Category = new Category();
+                        article.Category.Id = (int)dataAccess.Reader["IdCategoria"];
+                        article.Category.Description = (string)dataAccess.Reader["Categoria"];
+                        article.UrlPicture = (string)dataAccess.Reader["Foto"];
+                        article.Price = (decimal)dataAccess.Reader["Precio"];
+                        FilteredArticles.Add(article);
                     }
-                    
                 }
-                dataAccess.SetQuery(query);
-                dataAccess.ExecuteRead();
-                while (dataAccess.Reader.Read())
-                {
-                    Article article = new Article();
-                    article.Id = (int)dataAccess.Reader["Id"];
-                    article.Code = (string)dataAccess.Reader["Codigo"];
-                    article.Name = (string)dataAccess.Reader["Nombre"];
-                    article.Description = (string)dataAccess.Reader["Descripcion"];
-                    article.Brand = new Brand();
-                    article.Brand.Id = (int)dataAccess.Reader["IdMarca"];
-                    article.Brand.Description = (string)dataAccess.Reader["Marca"];
-                    article.Category = new Category();
-                    article.Category.Id = (int)dataAccess.Reader["IdCategoria"];
-                    article.Category.Description = (string)dataAccess.Reader["Categoria"];
-                    article.UrlPicture = (string)dataAccess.Reader["Foto"];
-                    article.Price = (decimal)dataAccess.Reader["Precio"];
-                    FilteredArticles.Add(article);
-                }
-                return FilteredArticles;
             }
             catch (Exception)
             {
@@ -175,6 +218,7 @@ namespace bussines
                 throw;
             }
             finally { dataAccess.CloseConnection(); }
+            return FilteredArticles;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,15 +16,25 @@ namespace eCommerceApp
     public partial class AddArticle : Form
     {
         private Article article = null;
+        private bool ViewDetail = false;
         public AddArticle()
         {
             InitializeComponent();
+            Text = "Agregar Articulo";
         }
         public AddArticle(Article article)
         {
             InitializeComponent();
             this.article = article;
+            Text = "Modificar Articulo";
+        }
 
+        public AddArticle(Article currentArticle, bool detail)
+        {
+            InitializeComponent();
+            this.article = currentArticle;
+            this.ViewDetail = detail;
+            Text = "Detalle de Articulo";
         }
 
         private void AddArticle_Load(object sender, EventArgs e)
@@ -69,6 +80,10 @@ namespace eCommerceApp
                 cmbCategory.SelectedIndex = article.Category.Id;
                 txtFoto.Text = article.UrlPicture.ToString();
                 UpDownPrice.Value = article.Price;
+                if (this.ViewDetail)
+                {
+                    onlyView();
+                }
             }
         }
 
@@ -142,9 +157,12 @@ namespace eCommerceApp
                 txtCode.Text = "*";
                 txtCode.ForeColor = Color.Red;
             }
-            else
+            else if (txtCode.Text.Length>1 && txtCode.Text.Contains("*"))
             {
+                int index = txtCode.Text.IndexOf("*"); // Find its position
+                txtCode.Text = txtCode.Text.Remove(index, 1); // Remove it
                 txtCode.ForeColor = Color.Black;
+                txtCode.SelectionStart = txtCode.Text.Length;
             }
         }
 
@@ -155,9 +173,12 @@ namespace eCommerceApp
                 txtName.Text = "*";
                 txtName.ForeColor = Color.Red;
             }
-            else
+            else if (txtName.Text.Length > 1 && txtName.Text.Contains("*"))
             {
+                int index = txtName.Text.IndexOf("*"); // Find its position
+                txtName.Text = txtName.Text.Remove(index, 1); // Remove it
                 txtName.ForeColor = Color.Black;
+                txtName.SelectionStart = txtName.Text.Length;
             }
         }
 
@@ -168,10 +189,53 @@ namespace eCommerceApp
                 txtDescription.Text = "*";
                 txtDescription.ForeColor = Color.Red;
             }
-            else
+            else if (txtDescription.Text.Length > 1 && txtDescription.Text.Contains("*"))
             {
+                
+                int index = txtDescription.Text.IndexOf("*"); // Find its position
+                txtDescription.Text = txtDescription.Text.Remove(index, 1); // Remove it
                 txtDescription.ForeColor = Color.Black;
+                txtDescription.SelectionStart = txtDescription.Text.Length;
             }
+        }
+
+        private void correctCursorPosition(TextBox txtBox)
+        {
+            txtBox.SelectionStart = 0;
+        }
+
+        private void onlyView()
+        {
+            txtCode.Enabled = false;
+            txtName.Enabled = false;
+            txtFoto.Enabled = false;
+            btnAddImage.Enabled = false;
+            txtDescription.Enabled = false;
+            cmbBrand.Enabled = false;
+            cmbCategory.Enabled = false;
+            btnAcept.Enabled = false;
+            btnCancel.Text = "Listo";
+            UpDownPrice.Enabled = false;
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void txtCode_Click(object sender, EventArgs e)
+        {
+            correctCursorPosition(txtCode);
+        }
+
+        private void txtName_Click(object sender, EventArgs e)
+        {
+            correctCursorPosition(txtName);
+        }
+
+        private void txtDescription_Click(object sender, EventArgs e)
+        {
+            correctCursorPosition(txtDescription);
         }
     }
 }

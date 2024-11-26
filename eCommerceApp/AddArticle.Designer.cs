@@ -66,6 +66,7 @@
             this.txtCode.Size = new System.Drawing.Size(163, 26);
             this.txtCode.TabIndex = 0;
             this.txtCode.Text = "*";
+            this.txtCode.Click += new System.EventHandler(this.txtCode_Click);
             this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
             // 
             // lblName
@@ -84,6 +85,7 @@
             this.txtName.Size = new System.Drawing.Size(163, 26);
             this.txtName.TabIndex = 1;
             this.txtName.Text = "*";
+            this.txtName.Click += new System.EventHandler(this.txtName_Click);
             this.txtName.TextChanged += new System.EventHandler(this.txtName_TextChanged);
             // 
             // lblDescription
@@ -102,6 +104,7 @@
             this.txtDescription.Size = new System.Drawing.Size(163, 26);
             this.txtDescription.TabIndex = 2;
             this.txtDescription.Text = "*";
+            this.txtDescription.Click += new System.EventHandler(this.txtDescription_Click);
             this.txtDescription.TextChanged += new System.EventHandler(this.txtDescrption_TextChanged);
             // 
             // lblBrand
@@ -192,6 +195,7 @@
             this.btnCancel.TabIndex = 9;
             this.btnCancel.Text = "Cancelar";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // label1
             // 
