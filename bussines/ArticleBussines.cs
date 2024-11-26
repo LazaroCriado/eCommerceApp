@@ -86,7 +86,7 @@ namespace bussines
                 dataAccess.SetParameter("@description", article.Description);
                 dataAccess.SetParameter("@idBrand", article.Brand.Id);
                 dataAccess.SetParameter("@idCategory", article.Category.Id);
-                dataAccess.SetParameter("@UrlImagen", article.UrlPicture);
+                dataAccess.SetParameter("@UrlFoto", article.UrlPicture);
                 dataAccess.SetParameter("@Price",article.Price);
                 dataAccess.SetParameter("@id", article.Id);
                 dataAccess.ExecuteAction();

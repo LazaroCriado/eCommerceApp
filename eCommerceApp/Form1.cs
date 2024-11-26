@@ -115,7 +115,7 @@ namespace eCommerceApp
             }
             catch (Exception ex)
             {
-
+                MessageBox.Show(ex.Message);
                 throw ex; 
             }
         }
@@ -131,7 +131,7 @@ namespace eCommerceApp
                 cmbCriteria.Items.Add("Su Descripcion contiene");
                 cmbCriteria.Items.Add("Su Marca contiene");
                 cmbCriteria.Items.Add("Su Categoria contiene");
-                cmbCriteria.SelectedItem = "Su Nombre Contiene";
+                cmbCriteria.SelectedIndex = 1;
             }
             else
             {
@@ -145,52 +145,59 @@ namespace eCommerceApp
 
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
-
-            if (!txtFilter.Text.All(char.IsDigit))
+            if (cmbField.SelectedItem.ToString() == "Precio")
             {
-                txtFilter.ForeColor = Color.Red;
-            }
-            else
-            {
-                txtFilter.ForeColor = Color.Black;
-            }
-
-            /*
-            if(cmbField.SelectedItem.ToString() == "Texto")
-            {
-                if (string.IsNullOrEmpty(txtFilter.Text))
+                if (txtFilter.Text.Any(char.IsLetter))
                 {
-                    txtFilter.Text = "*";
                     txtFilter.ForeColor = Color.Red;
                 }
-                else 
+                else
                 {
-                    txtFilter.ForeColor= Color.Black;
+                    txtFilter.ForeColor = Color.Black;
                 }
-            }*/
-
+            }
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
             ArticleBussines articleBussines = new ArticleBussines();
-            try
+            if (!validateFilter())
             {
-                string field = cmbField.SelectedItem.ToString();
-                string criteria = cmbCriteria.SelectedItem.ToString();
-                string filter = txtFilter.Text;
-                if(field=="Precio" && !filter.All(char.IsDigit))
+                try
                 {
-                    MessageBox.Show("Utilice solo numeros para filtar por precio.");
+                    string field = cmbField.SelectedItem.ToString();
+                    string criteria = cmbCriteria.SelectedItem.ToString();
+                    string filter = txtFilter.Text;
+                    List<Article> list = articleBussines.Filter(field, criteria, filter);
+                    dgvArticles.DataSource = list;
                 }
-                List<Article> list = articleBussines.Filter(field, criteria, filter);
-                dgvArticles.DataSource = list;
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    throw;
+                }
             }
-            catch (Exception)
+            else
             {
-
-                throw;
+                MessageBox.Show("Complete los campos correctamente");
             }
+        }
+        private bool validateFilter()
+        {
+            if (cmbField.SelectedIndex < 0)
+            {
+                return true;
+            }
+            if (cmbCriteria.SelectedIndex < 0)
+            {
+                return true;
+            }
+            if (cmbField.SelectedItem.ToString() == "Precio" && txtFilter.Text.Any(char.IsLetter))
+            {
+                return true;
+            }
+            return false;
+        
         }
 
         private void btnViewDetail_Click(object sender, EventArgs e)

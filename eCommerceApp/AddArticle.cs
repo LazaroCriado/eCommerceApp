@@ -3,10 +3,13 @@ using domain;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,6 +20,7 @@ namespace eCommerceApp
     {
         private Article article = null;
         private bool ViewDetail = false;
+        private OpenFileDialog openFileDialog = null;
         public AddArticle()
         {
             InitializeComponent();
@@ -27,6 +31,7 @@ namespace eCommerceApp
             InitializeComponent();
             this.article = article;
             Text = "Modificar Articulo";
+            btnAcept.Text = "Modificar";
         }
 
         public AddArticle(Article currentArticle, bool detail)
@@ -91,9 +96,13 @@ namespace eCommerceApp
         {
             ArticleBussines articleBussines = new ArticleBussines();
 
-            Article article = new Article();
+            
             try
             {
+                if (this.article == null)
+                {   
+                    article = new Article();
+                }
                 article.Code = txtCode.Text;
                 article.Name = txtName.Text;
                 article.Description = txtDescription.Text;
@@ -101,25 +110,36 @@ namespace eCommerceApp
                 article.Category = (Category)cmbCategory.SelectedItem;
                 article.UrlPicture = txtFoto.Text;
                 article.Price = UpDownPrice.Value;
-                if (ArticleValidation())
+
+                if (article.Id != 0)
                 {
-                    articleBussines.Add(article);
-                }
-                if (string.IsNullOrEmpty(article.Id.ToString()))
-                {
-                    MessageBox.Show("Articulo agregado exitosamente");
+                    if (ArticleValidation())
+                    {
+                        articleBussines.Modify(article);
+                        MessageBox.Show("Articulo modificado exitosamente");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Articulo modificado exitosamente");
+                    if (ArticleValidation())
+                    {
+                        articleBussines.Add(article);
+                        MessageBox.Show("Articulo agregado exitosamente");
+                    }
                 }
-                
+
+                if (openFileDialog != null && !txtFoto.Text.ToUpper().Contains("HTTP") && !File.Exists(ConfigurationManager.AppSettings["images_folder"] + openFileDialog.SafeFileName))
+                {
+                    File.Copy(openFileDialog.FileName, ConfigurationManager.AppSettings["images_folder"] + openFileDialog.SafeFileName);
+                }
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 throw;
             }
+            Close();
         }
 
         private bool ArticleValidation()
@@ -236,6 +256,21 @@ namespace eCommerceApp
         private void txtDescription_Click(object sender, EventArgs e)
         {
             correctCursorPosition(txtDescription);
+        }
+
+        private void btnAddImage_Click(object sender, EventArgs e)
+        {
+            openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "jpg|*.jpg|png|*.png";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                txtFoto.Text = openFileDialog.FileName;
+                LoadPic();
+
+                //para guardar la imagen en una carpeta
+
+                //File.Copy(openFileDialog.FileName, ConfigurationManager.AppSettings["images_folder"] + openFileDialog.SafeFileName);
+            }
         }
     }
 }

@@ -162,9 +162,11 @@
             // 
             // picBoxArticle
             // 
+            this.picBoxArticle.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.picBoxArticle.Location = new System.Drawing.Point(321, 36);
             this.picBoxArticle.Name = "picBoxArticle";
             this.picBoxArticle.Size = new System.Drawing.Size(442, 357);
+            this.picBoxArticle.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picBoxArticle.TabIndex = 12;
             this.picBoxArticle.TabStop = false;
             // 
@@ -176,6 +178,7 @@
             this.btnAddImage.TabIndex = 6;
             this.btnAddImage.Text = "+";
             this.btnAddImage.UseVisualStyleBackColor = true;
+            this.btnAddImage.Click += new System.EventHandler(this.btnAddImage_Click);
             // 
             // btnAcept
             // 

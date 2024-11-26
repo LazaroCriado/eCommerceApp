@@ -13,4 +13,6 @@ select Id, Descripcion from MARCAS
 
 select Id, Descripcion from CATEGORIAS
 
---update ARTICULOS set Codigo = @code, Nombre = @name, Descripcion = @description, IdMarca = @idMarca, IdCategoria = @idCategory where id = @id
+
+
+update ARTICULOS set Codigo = 'a', Nombre = 'a', Descripcion = 'a', IdMarca = 1, IdCategoria = 2, ImagenUrl='a', Precio = 4 where id = 19
