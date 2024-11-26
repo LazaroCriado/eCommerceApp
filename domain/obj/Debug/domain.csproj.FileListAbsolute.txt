@@ -1,0 +1,6 @@
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\domain\bin\Debug\domain.dll
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\domain\bin\Debug\domain.pdb
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\domain\obj\Debug\domain.csproj.AssemblyReference.cache
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\domain\obj\Debug\domain.csproj.CoreCompileInputs.cache
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\domain\obj\Debug\domain.dll
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\domain\obj\Debug\domain.pdb

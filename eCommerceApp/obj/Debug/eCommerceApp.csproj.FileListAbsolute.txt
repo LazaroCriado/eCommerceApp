@@ -8,3 +8,9 @@ C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceAp
 C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.csproj.CoreCompileInputs.cache
 C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.exe
 C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.pdb
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\bussines.dll
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\domain.dll
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\bussines.pdb
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\bin\Debug\domain.pdb
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.csproj.CopyComplete
+C:\Repositorios\Curso C#\TPFinalNivel2_Criado\eCommerceApp\obj\Debug\eCommerceApp.AddArticle.resources
